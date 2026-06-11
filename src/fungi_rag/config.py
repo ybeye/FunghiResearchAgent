@@ -10,7 +10,7 @@ from fungi_rag.utils import ensure_dir
 
 
 EmbeddingBackend = Literal["sentence_transformers", "hashing", "openai"]
-GeneratorBackend = Literal["codex_bridge", "codex_cli"]
+GeneratorBackend = Literal["codex_bridge", "codex_cli", "transformers"]
 
 
 class Settings(BaseSettings):
@@ -25,9 +25,14 @@ class Settings(BaseSettings):
     embedding_model: str = "BAAI/bge-small-en-v1.5"
     generator_backend: GeneratorBackend = "codex_bridge"
     enable_codex_cli: bool = False
+    hf_model: str = "HuggingFaceTB/SmolLM2-360M-Instruct"
+    hf_device: str = "auto"
+    hf_max_new_tokens: int = Field(default=220, ge=20, le=1000)
 
     chroma_dir: Path = Path("data/chroma")
     upload_dir: Path = Path("data/uploads")
+    background_dir: Path = Path("data/background")
+    references_dir: Path = Path("data/references")
     source_raw_dir: Path = Path("data/sources/raw")
     source_state_path: Path = Path("data/sources/sources.jsonl")
     index_dir: Path = Path("data/index")
@@ -44,6 +49,8 @@ class Settings(BaseSettings):
         for path in [
             self.chroma_dir,
             self.upload_dir,
+            self.background_dir,
+            self.references_dir,
             self.source_raw_dir,
             self.source_state_path.parent,
             self.index_dir,
