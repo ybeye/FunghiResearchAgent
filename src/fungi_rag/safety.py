@@ -35,6 +35,17 @@ class SafetyPolicy:
         r"\bfield identification\b",
         r"\bwhat mushroom is this\b",
         r"\bpoisonous or safe\b",
+
+        r"\bcure\b",
+        r"\bcancer\b",
+        r"\btreat\b",
+        r"\btreatment\b",
+        r"\bheal\b",
+        r"\btherapy\b",
+        r"\bmedicine\b",
+        r"\bmedical\b",
+        r"\bdisease\b",
+        r"\bdiagnose\b",
     ]
 
     def __init__(self, mode: str = "strict") -> None:
